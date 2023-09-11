@@ -8,12 +8,9 @@ namespace Progress_Store.Pages
         {
         }
 
-        public async Task AddDevCraftCompleteToCartAsync()
+        public void AddDevCraftCompleteToCart()
         {
-            await Task.Run(() =>
-            {
-                DevCraftCompleteBuyNowButton.Click();
-            });
+            DevCraftCompleteBuyNowButton.Click();
         }
     }
 }

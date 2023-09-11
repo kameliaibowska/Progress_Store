@@ -10,8 +10,6 @@ namespace Progress_Store.Pages
         {
         }
 
-        private WebDriverWait wait;
-
         public string CheckPageTitle()
         {
             return HomePageTitle.Text;
@@ -19,16 +17,7 @@ namespace Progress_Store.Pages
 
         public void AcceptCookies()
         {
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-
-            var acceptCookiesButton = wait.Until(
-                ExpectedConditions.ElementIsVisible(By.Id("onetrust-accept-btn-handler")));
-
-
-            //await Task.Run(() =>
-            //{
-            acceptCookiesButton.Click();
-            //});
+            AcceptCookiesButton.Click();
         }
 
         public void NavigateToPurchasePage()

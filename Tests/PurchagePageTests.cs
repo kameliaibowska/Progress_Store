@@ -1,17 +1,17 @@
-﻿using Progress_Store.Pages;
+﻿using OpenQA.Selenium.Support.UI;
+using Progress_Store.Pages;
+using SeleniumExtras.WaitHelpers;
 
 namespace Progress_Store.Tests
 {
     public class PurchagePageTests : HomeTest, Constants
     {
-        private HomePage homePage;
         private PurchasePage purchasePage;
         private YourOrderPage yourOrderPage;
 
         [SetUp]
         public void Setup()
         {
-            homePage = new HomePage(driver);
             purchasePage = new PurchasePage(driver);
             yourOrderPage = new YourOrderPage(driver);
             NavigateToPurchasePage();
@@ -20,19 +20,18 @@ namespace Progress_Store.Tests
         [Test]
         public void AddItemToCart()
         {
-            //await Task.Run(async () =>
-            //{
-            //    await purchasePage.AddDevCraftCompleteToCartAsync();
-            //});
+            purchasePage.AddDevCraftCompleteToCart();
 
-            //Assert.That(yourOrderPage.IsPageOpen(), Is.True,
-            //    Constants.PageNotFound);
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementExists(By.ClassName("loader-content")));
+
+            Assert.That(yourOrderPage.IsPageOpen(), Is.True,
+                Constants.PageNotFound);
         }
 
         private void NavigateToPurchasePage()
         {
-            homePage.Open();
-            // homePage.AcceptCookies();
+            homePage.AcceptCookies();
             homePage.NavigateToPurchasePage();
         }
     }

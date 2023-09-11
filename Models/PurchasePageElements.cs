@@ -10,9 +10,10 @@ namespace Progress_Store.Models
 
         protected override string BaseUrl => $"{Constants.BaseUrl}/purchase.aspx?filter=web";
 
-        protected IList<IWebElement> ProductItems => driver.FindElements(By.ClassName("Pricings-button"));
+        protected IWebElement DevCraftUIBuyNowButton => driver.FindElement(By.XPath("(//a[contains(.,'Buy now')])[1]"));
 
-        protected IWebElement DevCraftCompleteBuyNowButton => 
-            driver.FindElement(By.XPath("(//a[@class='Btn Btn--prim4 u-db'])[2]"));
+        protected IWebElement DevCraftCompleteBuyNowButton => driver.FindElement(By.XPath("(//a[contains(.,'Buy now')])[2]"));
+
+        protected IWebElement DevCraftUltimateBuyNowButton => driver.FindElement(By.XPath("(//a[contains(.,'Buy now')])[3]"));
     }
 }

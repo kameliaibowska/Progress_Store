@@ -4,7 +4,7 @@ namespace Progress_Store.Tests
 {
     public class HomeTest : RootTest
     {
-        private HomePage homePage;
+        protected HomePage homePage;
 
         [SetUp]
         public new void Setup()

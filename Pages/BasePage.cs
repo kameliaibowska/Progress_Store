@@ -1,3 +1,6 @@
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
+
 namespace Progress_Store.Pages
 {
     public class BasePage
@@ -15,6 +18,7 @@ namespace Progress_Store.Pages
         public void Open()
         {
             driver.Navigate().GoToUrl(BaseUrl);
+            System.Threading.Thread.Sleep(1000);
         }
 
         public bool IsPageOpen()
