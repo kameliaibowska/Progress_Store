@@ -14,6 +14,6 @@ namespace Progress_Store.Models
 
         protected IWebElement AcceptCookiesButton => driver.FindElement(By.Id("onetrust-accept-btn-handler"));
 
-        protected IWebElement PricingLink => driver.FindElement(By.PartialLinkText("Pricing"));
+        protected IWebElement PricingLink => driver.FindElement(By.CssSelector(".TK-Menu-Item-Link[href='/purchase.aspx']"));
     }
 }

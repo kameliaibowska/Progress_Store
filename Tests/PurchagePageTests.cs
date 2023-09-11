@@ -32,7 +32,7 @@ namespace Progress_Store.Tests
         private void NavigateToPurchasePage()
         {
             homePage.Open();
-            homePage.AcceptCookies();
+            // homePage.AcceptCookies();
             homePage.NavigateToPurchasePage();
         }
     }
