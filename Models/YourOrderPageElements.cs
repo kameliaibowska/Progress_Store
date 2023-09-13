@@ -35,11 +35,6 @@ namespace Progress_Store.Models
             return driver.FindElement(By.CssSelector($".k-input:nth-child({index}"));
         }
 
-        //protected IWebElement ItemToSelect(string text)
-        //{
-        //    return driver.FindElement(By.XPath($"//li[text()='{text}']"));
-        //}
-
         protected IWebElement TermPrice(int index)
         {
             return driver.FindElement(By.CssSelector($".e2e-price-per-license:nth-child({index + 1})"));
