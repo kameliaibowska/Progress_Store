@@ -1,4 +1,6 @@
-﻿using Progress_Store.Models;
+﻿using OpenQA.Selenium.Support.UI;
+using Progress_Store.Models;
+using SeleniumExtras.WaitHelpers;
 
 namespace Progress_Store.Pages
 {
@@ -8,7 +10,7 @@ namespace Progress_Store.Pages
         {
         }
 
-        public void CloseSigneUpPopUp()
+        public void CloseSignUpPopUp()
         {
             SignUpCloseButton.Click();
         }
@@ -21,6 +23,158 @@ namespace Progress_Store.Pages
         public void ClickContinueAsGuestButton()
         {
             ContinueAsGuestButton.Click();
+        }
+
+        public void RemoveProductsFromShoppingCart()
+        {
+            foreach (var removeLink in RemoveProductLinks)
+            {
+                removeLink.Click();
+            }
+        }
+
+        public bool ShoppingCartIsEmpty()
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.TextToBePresentInElement(
+                EmptyShoppingCartMessage, Constants.EmptyShoppingCart));
+            return EmptyShoppingCartMessage.Displayed;
+        }
+
+        public double GetUnitPrice(int index)
+        {
+            var unitPrice = UnitPrice(index).Text.Replace("$", "").Trim();
+            return double.Parse(unitPrice);
+        }
+
+        public double GetLicenseSaving(int index)
+        {
+            if (DoesElementExist(driver, By.ClassName("e2e-item-licenses-savings")))
+            {
+                var licenseSavingValue = LicenseSaving(index).Text.Replace("Save $", "").Trim();
+                return double.Parse(licenseSavingValue);
+            }
+            else { return 0; }
+        }
+
+        public void ChangeLicensesQuantity(int index, string quantity)
+        {
+            LicensesQuantityDropdown(index).SendKeys(quantity + Keys.Enter);
+        }
+
+        public void ChangeMaintenanceQuantity(int index, string quantity)
+        {
+            MaintenanceQuantityDropdown(index).SendKeys(quantity + Keys.Enter);
+        }
+
+        public double GetTermPrice(int index)
+        {
+            if (TermPrice(index).Text != "Included")
+            {
+                var termPrice = TermPrice(index).Text.Replace("$", "").Trim();
+                return double.Parse(termPrice);
+            }
+            else { return 0; }
+        }
+
+        public double GetMaintenanceSaving(int index)
+        {
+            if (DoesElementExist(driver, By.ClassName("e2e-item-ms-savings")))
+            {
+                var maintenanceSavingValue = MaintenanceSaving(index).Text.Replace("Save $", "").Trim();
+                return double.Parse(maintenanceSavingValue);
+            }
+            else { return 0; }
+        }
+
+        public double SubtotalPrice(int index, int quantity)
+        {
+            var subtotalPrice = GetUnitPrice(index) * quantity + GetTermPrice(index);
+            return Math.Round(subtotalPrice, 2);
+        }
+
+        private double GetTotalSavingsValue(int index, int quantity)
+        {
+            var totalSavingsValue = GetLicenseSaving(index) * quantity + GetMaintenanceSaving(index) * quantity;
+            return Math.Round(totalSavingsValue, 2);
+        }
+
+        private double GetLicensesPrice()
+        {
+            var licensesValue = LicensesValue.Text.Replace("$", "").Trim();
+            return double.Parse(licensesValue);
+        }
+
+        public void SetMaintenancePrice(string value)
+        {
+            MaintenanceValue.SendKeys(value);
+        }
+
+        public bool CheckLicensesTotalPrice(int index)
+        {
+            double licenses = 0;
+            foreach (var tableRows in ProductsTableRows)
+            {
+                licenses += GetUnitPrice(index);
+            }
+            return licenses == GetLicensesPrice();
+        }
+
+        public bool CheckMaintenanceTotalPrice(int index)
+        {
+            double maintenance = 0;
+            foreach (var tableRows in ProductsTableRows)
+            {
+                maintenance += GetTermPrice(index);
+            }
+            return maintenance == GetMaintenancePrice();
+        }
+
+        public bool CheckTotalDiscountsPrice(int index, int quantity)
+        {
+            double discounts = 0;
+            foreach (var tableRows in ProductsTableRows)
+            {
+                discounts += GetTotalSavingsValue(index, quantity);
+            }
+            return discounts == GetTotalDiscountPrice();
+        }
+
+        public bool CheckTotalPriceIsCorrect()
+        {
+            var totalPrice = GetLicensesPrice() + GetMaintenancePrice() + GetTotalDiscountPrice();
+            return totalPrice == GetTotalPrice();
+        }
+
+        private double GetMaintenancePrice()
+        {
+            if (DoesElementExist(driver, By.ClassName("e2e-maintenance-price")))
+            {
+                var maintenanceValue = MaintenanceValue.Text.Replace("$", "").Trim();
+                return double.Parse(maintenanceValue);
+            }
+            else { return 0; }
+        }
+
+        private double GetTotalDiscountPrice()
+        {
+            if (DoesElementExist(driver, By.ClassName("e2e-total-discounts-price")))
+            {
+                var totalDiscountValue = TotalDiscountsValue.Text.Replace("- $", "-").Trim();
+                return double.Parse(totalDiscountValue);
+            }
+            else { return 0; }
+        }
+
+        private double GetTotalPrice()
+        {
+            var totalValue = TotalPriceValue.Text.Replace("US $", "").Trim();
+            return double.Parse(totalValue);
+        }
+
+        public void AcceptCookies()
+        {
+            AcceptCookiesButton.Click();
         }
     }
 }

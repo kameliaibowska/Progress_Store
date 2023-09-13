@@ -12,5 +12,10 @@ namespace Progress_Store.Pages
         {
             DevCraftCompleteBuyNowButton.Click();
         }
+
+        public void AddDevCraftUIToCart()
+        {
+            DevCraftUIBuyNowButton.Click();
+        }
     }
 }

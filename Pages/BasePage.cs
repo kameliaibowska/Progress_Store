@@ -18,7 +18,7 @@ namespace Progress_Store.Pages
         public void Open()
         {
             driver.Navigate().GoToUrl(BaseUrl);
-            System.Threading.Thread.Sleep(1000);
+            Thread.Sleep(1000);
         }
 
         public bool IsPageOpen()
@@ -29,6 +29,25 @@ namespace Progress_Store.Pages
         public string GetPageTitle()
         {
             return driver.Title;
+        }
+
+        public bool DoesElementExist(IWebDriver driver, By by)
+        {
+            try
+            {
+                driver.FindElement(by);
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        }
+
+        public void WaitElementToBeLoaded()
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementExists(By.ClassName("loader-content")));
         }
     }
 }

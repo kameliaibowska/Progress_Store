@@ -1,6 +1,4 @@
-﻿using OpenQA.Selenium.Support.UI;
-using Progress_Store.Pages;
-using SeleniumExtras.WaitHelpers;
+﻿using Progress_Store.Pages;
 
 namespace Progress_Store.Tests
 {
@@ -21,12 +19,11 @@ namespace Progress_Store.Tests
         public void AddItemToCart()
         {
             purchasePage.AddDevCraftCompleteToCart();
-
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(ExpectedConditions.ElementExists(By.ClassName("loader-content")));
+            purchasePage.WaitElementToBeLoaded();
 
             Assert.That(yourOrderPage.IsPageOpen(), Is.True,
                 Constants.PageNotFound);
+            yourOrderPage.AcceptCookies();
         }
 
         private void NavigateToPurchasePage()

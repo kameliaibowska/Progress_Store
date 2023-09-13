@@ -1,6 +1,4 @@
-﻿using OpenQA.Selenium.Support.UI;
-using Progress_Store.Models;
-using SeleniumExtras.WaitHelpers;
+﻿using Progress_Store.Models;
 
 namespace Progress_Store.Pages
 {
