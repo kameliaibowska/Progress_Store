@@ -30,24 +30,27 @@ namespace Progress_Store.Tests
             yourOrderPage.CheckTotalPriceIsCorrect();
         }
 
-        [TestCase(1, 3)]
-        [TestCase(1, 8)]
+        [TestCase(0, 3)]
+        [TestCase(0, 8)]
         public void UpdateLicenseCount(int index, int licenseCount)
         {
             var unitPrice = yourOrderPage.GetUnitPrice(index);
             double discount = 0;
-            yourOrderPage.ChangeLicensesQuantity(index, licenseCount.ToString());
+            yourOrderPage.ChangeLicensesQuantity(index, licenseCount);
             if (licenseCount >= 2 && licenseCount <= 5)
             {
-                discount = Math.Round(unitPrice * 0.05);
+                discount = Math.Round(unitPrice * 0.05, 2);
 
             }
             else if (licenseCount >= 6 && licenseCount <= 10)
             {
-                discount = Math.Round(unitPrice * 0.10);
+                discount = Math.Round(unitPrice * 0.10, 2);
             }
 
             var newUnitPrice = unitPrice - discount;
+
+            // Wait for DOM update
+            yourOrderPage.WaitLicenseSavingElementToBeLoaded();
 
             Assert.That(newUnitPrice, Is.EqualTo(yourOrderPage.GetUnitPrice(index)));
 
@@ -58,42 +61,46 @@ namespace Progress_Store.Tests
             yourOrderPage.CheckTotalPriceIsCorrect();
         }
 
-        [TestCase(1, "+1 year")]
-        [TestCase(1, "+3 years")]
-        public void UpdateMaintenanceCount(int index, string maitenanceYearsCount)
+        [TestCase(2, "+1 year")]
+        [TestCase(2, "+3 years")]
+        public void UpdateMaintenanceCount(int index, string maintenanceYearsCount)
         {
-            var termPrice = yourOrderPage.GetTermPrice(index);
+            var renewPrice = yourOrderPage.GetMaintenanceRenewPrice(index);
             double discount = 0;
-            yourOrderPage.ChangeMaintenanceQuantity(index, maitenanceYearsCount);
-            if (maitenanceYearsCount == "+1 year")
+            var maintenanceCount = int.Parse(maintenanceYearsCount.Replace("+", "")
+                .Replace(" year", "")
+                .Replace("s", "").Trim());
+
+            yourOrderPage.ChangeMaintenanceQuantity(index, maintenanceCount);
+            if (maintenanceYearsCount == "+1 year")
             {
-                discount = Math.Round(termPrice * 0.08);
+                discount = Math.Round(renewPrice * 0.05, 2);
 
             }
-            else if (maitenanceYearsCount == "+2 years")
+            else if (maintenanceYearsCount == "+2 years")
             {
-                discount = Math.Round(termPrice * 0.11);
+                discount = Math.Round(renewPrice * 0.08, 2);
             }
-            else if (maitenanceYearsCount == "+3 years")
+            else if (maintenanceYearsCount == "+3 years")
             {
-                discount = Math.Round(termPrice * 0.14);
+                discount = Math.Round(renewPrice * 0.11, 2);
             }
-            else if (maitenanceYearsCount == "+4 years")
+            else if (maintenanceYearsCount == "+4 years")
             {
-                discount = Math.Round(termPrice * 0.17);
+                discount = Math.Round(renewPrice * 0.14, 2);
             }
 
-            var newTermPrice = termPrice - discount;
+            var newTermPrice = renewPrice - discount;
+
+            // Wait for DOM update
+            yourOrderPage.WaitMaintenanceSavingElementToBeLoaded();
 
             Assert.That(newTermPrice, Is.EqualTo(yourOrderPage.GetTermPrice(index)));
 
-            var maitenanceCount = int.Parse(maitenanceYearsCount.Replace("+", "")
-                .Replace(" year", "")
-                .Replace("s", "").Trim());
-            yourOrderPage.SubtotalPrice(index, maitenanceCount);
+            yourOrderPage.SubtotalPrice(index, maintenanceCount);
             yourOrderPage.CheckMaintenanceTotalPrice(index);
             yourOrderPage.CheckMaintenanceTotalPrice(index);
-            yourOrderPage.CheckTotalDiscountsPrice(index, maitenanceCount);
+            yourOrderPage.CheckTotalDiscountsPrice(index, maintenanceCount);
             yourOrderPage.CheckTotalPriceIsCorrect();
         }
 

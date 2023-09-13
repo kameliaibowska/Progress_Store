@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium.Support.UI;
+﻿using System;
+using OpenQA.Selenium.Support.UI;
 using Progress_Store.Models;
 using SeleniumExtras.WaitHelpers;
 
@@ -57,14 +58,18 @@ namespace Progress_Store.Pages
             else { return 0; }
         }
 
-        public void ChangeLicensesQuantity(int index, string quantity)
+        public void ChangeLicensesQuantity(int index, int quantity)
         {
-            LicensesQuantityDropdown(index).SendKeys(quantity + Keys.Enter);
+            LicensesQuantityDropdown(index).Click();
+            var licenseQuantityPopup = LicensesQuantitySelection(quantity);
+            licenseQuantityPopup.Click();
         }
 
-        public void ChangeMaintenanceQuantity(int index, string quantity)
+        public void ChangeMaintenanceQuantity(int index, int maitenanceCount)
         {
-            MaintenanceQuantityDropdown(index).SendKeys(quantity + Keys.Enter);
+            MaintenanceQuantityDropdown(index).Click();
+            var maintenanceQuantityPopup = MaintenanceQuantitySelection(maitenanceCount);
+            maintenanceQuantityPopup.Click();
         }
 
         public double GetTermPrice(int index)
@@ -75,6 +80,13 @@ namespace Progress_Store.Pages
                 return double.Parse(termPrice);
             }
             else { return 0; }
+        }
+
+        public double GetMaintenanceRenewPrice(int index)
+        {
+            var termPrice = MaintenanceRenewPrice(index).Text.Replace("$", "").Trim();
+            return double.Parse(termPrice);
+
         }
 
         public double GetMaintenanceSaving(int index)
@@ -144,6 +156,18 @@ namespace Progress_Store.Pages
         {
             var totalPrice = GetLicensesPrice() + GetMaintenancePrice() + GetTotalDiscountPrice();
             return totalPrice == GetTotalPrice();
+        }
+
+        public void WaitLicenseSavingElementToBeLoaded()
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(2));
+            wait.Until(ExpectedConditions.ElementExists(By.ClassName("e2e-item-licenses-savings")));
+        }
+
+        public void WaitMaintenanceSavingElementToBeLoaded()
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            wait.Until(ExpectedConditions.ElementExists(By.ClassName("e2e-item-ms-savings")));
         }
 
         private double GetMaintenancePrice()

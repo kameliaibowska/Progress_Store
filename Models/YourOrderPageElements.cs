@@ -1,4 +1,7 @@
-﻿using Progress_Store.Pages;
+﻿using System;
+using OpenQA.Selenium.Support.UI;
+using Progress_Store.Pages;
+using SeleniumExtras.WaitHelpers;
 
 namespace Progress_Store.Models
 {
@@ -22,7 +25,7 @@ namespace Progress_Store.Models
 
         protected IWebElement UnitPrice(int index)
         {
-            return driver.FindElement(By.CssSelector($".e2e-price-per-license:nth-child({index})"));
+            return driver.FindElements(By.CssSelector(".e2e-price-per-license"))[index];
         }
 
         protected IWebElement LicenseSaving(int index)
@@ -32,12 +35,30 @@ namespace Progress_Store.Models
 
         protected IWebElement LicensesQuantityDropdown(int index)
         {
-            return driver.FindElement(By.CssSelector($".k-input:nth-child({index}"));
+            return driver.FindElements(By.CssSelector(".k-input"))[index];
+        }
+
+        protected IWebElement LicensesQuantityPopup()
+        {
+            return driver.FindElements(By.CssSelector(".k-popup"))[0];
+        }
+
+        protected IWebElement LicensesQuantitySelection(int quantity)
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(2));
+            return wait.Until(ExpectedConditions.ElementExists(By.CssSelector($"li[index='{quantity - 1}']")));
         }
 
         protected IWebElement TermPrice(int index)
         {
-            return driver.FindElement(By.CssSelector($".e2e-price-per-license:nth-child({index + 1})"));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(4));
+            wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.CssSelector(".e2e-price-per-license")));
+            return driver.FindElements(By.CssSelector(".e2e-price-per-license"))[index + 1];
+        }
+
+        protected IWebElement MaintenanceRenewPrice(int index)
+        {
+            return driver.FindElements(By.CssSelector(".align-items-baseline .bold"))[index - 1];
         }
 
         protected IWebElement MaintenanceSaving(int index)
@@ -47,7 +68,13 @@ namespace Progress_Store.Models
 
         protected IWebElement MaintenanceQuantityDropdown(int index)
         {
-            return driver.FindElement(By.CssSelector($".k-input:nth-child({index + 1}"));
+            return driver.FindElements(By.CssSelector(".k-input"))[index + 1];
+        }
+
+        protected IWebElement MaintenanceQuantitySelection(int quantity)
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            return wait.Until(ExpectedConditions.ElementExists(By.CssSelector($"li[index='{quantity}']")));
         }
 
         protected IWebElement SubtotalValue(int index)
