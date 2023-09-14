@@ -8,11 +8,6 @@ namespace Progress_Store.Pages
         {
         }
 
-        public string CheckPageTitle()
-        {
-            return HomePageTitle.Text;
-        }
-
         public void AcceptCookies()
         {
             AcceptCookiesButton.Click();

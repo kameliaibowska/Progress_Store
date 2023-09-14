@@ -9,7 +9,5 @@ namespace Progress_Store.Models
         }
 
         protected override string BaseUrl => $"{Constants.StoreUrl}/review-order";
-
-        protected IWebElement ProductsTable => driver.FindElement(By.ClassName("table--collapse"));
     }
 }

@@ -23,24 +23,25 @@ namespace Progress_Store.Tests
         // success scenario 
         [TestCase(Constants.FirstName, Constants.LastName, Constants.ValidEmail, Constants.Company, Constants.Phone, Constants.Address,
             Constants.CountryBulgaria, null, Constants.City, Constants.ZipCode, Constants.ValidVatId, null, null)]
-        // missing fisrst name
+        // missing first name
         [TestCase(" ", Constants.LastName, Constants.ValidEmail, Constants.Company, Constants.Phone, Constants.Address,
             Constants.CountryBulgaria, null, Constants.City, Constants.ZipCode, Constants.ValidVatId, null, Constants.RequiredFirstNameError)]
-        //[TestCase(Constants.FirstName, " ", Constants.ValidEmail, Constants.Company, Constants.Phone, Constants.Address,
-        //    Constants.CountryBulgaria, null, Constants.City, Constants.ZipCode, Constants.ValidVatId, null, Constants.RequiredLastNameError)]
-        // missin email
+        // missing last name
+        [TestCase(Constants.FirstName, " ", Constants.ValidEmail, Constants.Company, Constants.Phone, Constants.Address,
+            Constants.CountryBulgaria, null, Constants.City, Constants.ZipCode, Constants.ValidVatId, null, Constants.RequiredLastNameError)]
+        // missing email
         [TestCase(Constants.FirstName, Constants.LastName, "", Constants.Company, Constants.Phone, Constants.Address,
             Constants.CountryBulgaria, null, Constants.City, Constants.ZipCode, Constants.ValidVatId, null, Constants.RequiredEmailError)]
         // invalid email
         [TestCase(Constants.FirstName, Constants.LastName, Constants.InvalidEmail, Constants.Company, Constants.Phone, Constants.Address,
             Constants.CountryBulgaria, null, Constants.City, Constants.ZipCode, Constants.ValidVatId, null, Constants.InvalidEmailError)]
-        // Invalit VAT Id
+        // invalid VAT Id
         [TestCase(Constants.FirstName, Constants.LastName, Constants.InvalidEmail, Constants.Company, Constants.Phone, Constants.Address,
             Constants.CountryBulgaria, null, Constants.City, Constants.ZipCode, Constants.InvalidVatIdGST, null, Constants.InvalidVatIdError)]
         // invalid GST
         [TestCase(Constants.FirstName, Constants.LastName, Constants.ValidEmail, Constants.Company, Constants.Phone, Constants.Address,
             Constants.CountryCanada, Constants.CountryCanadaState, Constants.City, Constants.ZipCode, null, Constants.InvalidVatIdGST, Constants.InvalidGSTError)]
-        // Invalid ZipCode
+        // invalid ZipCode
         [TestCase(Constants.FirstName, Constants.LastName, Constants.ValidEmail, Constants.Company, Constants.Phone, Constants.Address,
             Constants.CountryUnitedStates, Constants.CountryUSState, Constants.City, Constants.InvalidZipCode, null, null, Constants.InvalidZipCodeError)]
         public void FillBillingContactInfoFormAndContinue(
@@ -102,24 +103,25 @@ namespace Progress_Store.Tests
         // success scenario 
         [TestCase(Constants.FirstName, Constants.LastName, Constants.ValidEmail, Constants.Company, Constants.Phone, Constants.Address,
             Constants.CountryBulgaria, null, Constants.City, Constants.ZipCode, Constants.ValidVatId, null, null)]
-        // missing fisrst name
+        // missing first name
         [TestCase(" ", Constants.LastName, Constants.ValidEmail, Constants.Company, Constants.Phone, Constants.Address,
             Constants.CountryBulgaria, null, Constants.City, Constants.ZipCode, Constants.ValidVatId, null, Constants.RequiredFirstNameError)]
-        //[TestCase(Constants.FirstName, " ", Constants.ValidEmail, Constants.Company, Constants.Phone, Constants.Address,
-        //    Constants.CountryBulgaria, null, Constants.City, Constants.ZipCode, Constants.ValidVatId, null, Constants.RequiredLastNameError)]
-        // missin email
+        // missing last name
+        [TestCase(Constants.FirstName, " ", Constants.ValidEmail, Constants.Company, Constants.Phone, Constants.Address,
+            Constants.CountryBulgaria, null, Constants.City, Constants.ZipCode, Constants.ValidVatId, null, Constants.RequiredLastNameError)]
+        // missing email
         [TestCase(Constants.FirstName, Constants.LastName, "", Constants.Company, Constants.Phone, Constants.Address,
             Constants.CountryBulgaria, null, Constants.City, Constants.ZipCode, Constants.ValidVatId, null, Constants.RequiredEmailError)]
         // invalid email
         [TestCase(Constants.FirstName, Constants.LastName, Constants.InvalidEmail, Constants.Company, Constants.Phone, Constants.Address,
             Constants.CountryBulgaria, null, Constants.City, Constants.ZipCode, Constants.ValidVatId, null, Constants.InvalidEmailError)]
-        // Invalit VAT Id
+        // invalid VAT Id
         [TestCase(Constants.FirstName, Constants.LastName, Constants.InvalidEmail, Constants.Company, Constants.Phone, Constants.Address,
             Constants.CountryBulgaria, null, Constants.City, Constants.ZipCode, Constants.InvalidVatIdGST, null, Constants.InvalidVatIdError)]
         // invalid GST
         [TestCase(Constants.FirstName, Constants.LastName, Constants.ValidEmail, Constants.Company, Constants.Phone, Constants.Address,
             Constants.CountryCanada, Constants.CountryCanadaState, Constants.City, Constants.ZipCode, null, Constants.InvalidVatIdGST, Constants.InvalidGSTError)]
-        // Invalid ZipCode
+        // invalid ZipCode
         [TestCase(Constants.FirstName, Constants.LastName, Constants.ValidEmail, Constants.Company, Constants.Phone, Constants.Address,
             Constants.CountryUnitedStates, Constants.CountryUSState, Constants.City, Constants.InvalidZipCode, null, null, Constants.InvalidZipCodeError)]
         public void FillLicenseContactInfoFormAndBackToCart(

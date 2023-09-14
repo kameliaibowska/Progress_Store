@@ -48,16 +48,6 @@ namespace Progress_Store.Pages
             return double.Parse(unitPrice);
         }
 
-        public double GetLicenseSaving(int index)
-        {
-            if (DoesElementExist(driver, By.ClassName("e2e-item-licenses-savings")))
-            {
-                var licenseSavingValue = LicenseSaving(index).Text.Replace("Save $", "").Trim();
-                return double.Parse(licenseSavingValue);
-            }
-            else { return 0; }
-        }
-
         public void ChangeLicensesQuantity(int index, int quantity)
         {
             LicensesQuantityDropdown(index).Click();
@@ -86,40 +76,12 @@ namespace Progress_Store.Pages
         {
             var termPrice = MaintenanceRenewPrice(index).Text.Replace("$", "").Trim();
             return double.Parse(termPrice);
-
-        }
-
-        public double GetMaintenanceSaving(int index)
-        {
-            if (DoesElementExist(driver, By.ClassName("e2e-item-ms-savings")))
-            {
-                var maintenanceSavingValue = MaintenanceSaving(index).Text.Replace("Save $", "").Trim();
-                return double.Parse(maintenanceSavingValue);
-            }
-            else { return 0; }
         }
 
         public double SubtotalPrice(int index, int quantity)
         {
             var subtotalPrice = GetUnitPrice(index) * quantity + GetTermPrice(index);
             return Math.Round(subtotalPrice, 2);
-        }
-
-        private double GetTotalSavingsValue(int index, int quantity)
-        {
-            var totalSavingsValue = GetLicenseSaving(index) * quantity + GetMaintenanceSaving(index) * quantity;
-            return Math.Round(totalSavingsValue, 2);
-        }
-
-        private double GetLicensesPrice()
-        {
-            var licensesValue = LicensesValue.Text.Replace("$", "").Trim();
-            return double.Parse(licensesValue);
-        }
-
-        public void SetMaintenancePrice(string value)
-        {
-            MaintenanceValue.SendKeys(value);
         }
 
         public bool CheckLicensesTotalPrice(int index)
@@ -170,6 +132,21 @@ namespace Progress_Store.Pages
             wait.Until(ExpectedConditions.ElementExists(By.ClassName("e2e-item-ms-savings")));
         }
 
+        public void AcceptCookies()
+        {
+            AcceptCookiesButton.Click();
+        }
+
+        private double GetLicenseSaving(int index)
+        {
+            if (DoesElementExist(driver, By.ClassName("e2e-item-licenses-savings")))
+            {
+                var licenseSavingValue = LicenseSaving(index).Text.Replace("Save $", "").Trim();
+                return double.Parse(licenseSavingValue);
+            }
+            else { return 0; }
+        }
+
         private double GetMaintenancePrice()
         {
             if (DoesElementExist(driver, By.ClassName("e2e-maintenance-price")))
@@ -190,15 +167,32 @@ namespace Progress_Store.Pages
             else { return 0; }
         }
 
+        private double GetTotalSavingsValue(int index, int quantity)
+        {
+            var totalSavingsValue = GetLicenseSaving(index) * quantity + GetMaintenanceSaving(index) * quantity;
+            return Math.Round(totalSavingsValue, 2);
+        }
+
+        private double GetMaintenanceSaving(int index)
+        {
+            if (DoesElementExist(driver, By.ClassName("e2e-item-ms-savings")))
+            {
+                var maintenanceSavingValue = MaintenanceSaving(index).Text.Replace("Save $", "").Trim();
+                return double.Parse(maintenanceSavingValue);
+            }
+            else { return 0; }
+        }
+
+        private double GetLicensesPrice()
+        {
+            var licensesValue = LicensesValue.Text.Replace("$", "").Trim();
+            return double.Parse(licensesValue);
+        }
+
         private double GetTotalPrice()
         {
             var totalValue = TotalPriceValue.Text.Replace("US $", "").Trim();
             return double.Parse(totalValue);
-        }
-
-        public void AcceptCookies()
-        {
-            AcceptCookiesButton.Click();
         }
     }
 }

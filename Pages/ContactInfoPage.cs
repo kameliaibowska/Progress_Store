@@ -161,7 +161,7 @@ namespace Progress_Store.Pages
         }
 
 
-        public async Task PressBackButton()
+        public void PressBackButton()
         {
             BackButton.Click();
         }

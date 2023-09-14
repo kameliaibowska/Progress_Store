@@ -26,11 +26,6 @@ namespace Progress_Store.Pages
             return driver.Url == BaseUrl;
         }
 
-        public string GetPageTitle()
-        {
-            return driver.Title;
-        }
-
         public bool DoesElementExist(IWebDriver driver, By by)
         {
             try

@@ -10,8 +10,6 @@ namespace Progress_Store.Models
 
         protected override string BaseUrl => $"{Constants.StoreUrl}/contact-info";
 
-        protected IWebElement ContactInfoPageTitle => driver.FindElement(By.TagName("title"));
-
         protected IWebElement BillingFirstNameField => driver.FindElement(By.Id("biFirstName"));
 
         protected IWebElement BillingLastNameField => driver.FindElement(By.Id("biLastName"));
@@ -27,6 +25,7 @@ namespace Progress_Store.Models
         protected IWebElement BillingSelectCountryDropdown => driver.FindElements(By.ClassName("k-input")).First();
 
         protected IWebElement BillingSelectStateDropdown => driver.FindElement(By.Id("biState")).FindElement(By.ClassName("k-input"));
+
         protected IWebElement BillingCityField => driver.FindElement(By.Id("biCity"));
 
         protected IWebElement BillingZipCodeField => driver.FindElement(By.Id("biZipCode"));
@@ -49,18 +48,8 @@ namespace Progress_Store.Models
 
         protected IWebElement LicenseHolderSelectCountryDropdown => driver.FindElements(By.ClassName("k-input")).Last();
 
-        protected IWebElement LicenseHolderSelectStateDropdown => driver.FindElement(By.Id("siState"));
-
-        protected IWebElement LicenseHolderCityField => driver.FindElement(By.Id("siCity"));
-
-        protected IWebElement LicenseHolderZipCodeField => driver.FindElement(By.Id("siZipCode"));
-
-        protected IWebElement LicenseHolderGSTFiled => driver.FindElement(By.Id("siGST"));
-
         protected IWebElement ErrorMessageLabel => driver.FindElement(By.ClassName("error-message"));
 
         protected IWebElement BackButton => driver.FindElement(By.ClassName("e2e-back"));
-
-        protected IWebElement ContinueButton => driver.FindElement(By.ClassName("e2e-continue"));
     }
 }

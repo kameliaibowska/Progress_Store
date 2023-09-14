@@ -1,5 +1,4 @@
-﻿using System;
-using OpenQA.Selenium.Support.UI;
+﻿using OpenQA.Selenium.Support.UI;
 using Progress_Store.Pages;
 using SeleniumExtras.WaitHelpers;
 
@@ -16,8 +15,6 @@ namespace Progress_Store.Models
         protected IWebElement AcceptCookiesButton => driver.FindElement(By.Id("onetrust-accept-btn-handler"));
 
         protected IWebElement SignUpCloseButton => driver.FindElement(By.ClassName("fa-times"));
-
-        protected IList<IWebElement> ProductName => driver.FindElements(By.ClassName("e2e-product-name"));
 
         protected IList<IWebElement> RemoveProductLinks => driver.FindElements(By.ClassName("e2e-delete-item"));
 
@@ -36,11 +33,6 @@ namespace Progress_Store.Models
         protected IWebElement LicensesQuantityDropdown(int index)
         {
             return driver.FindElements(By.CssSelector(".k-input"))[index];
-        }
-
-        protected IWebElement LicensesQuantityPopup()
-        {
-            return driver.FindElements(By.CssSelector(".k-popup"))[0];
         }
 
         protected IWebElement LicensesQuantitySelection(int quantity)
@@ -77,20 +69,9 @@ namespace Progress_Store.Models
             return wait.Until(ExpectedConditions.ElementExists(By.CssSelector($"li[index='{quantity}']")));
         }
 
-        protected IWebElement SubtotalValue(int index)
-        {
-            return driver.FindElement(By.CssSelector($".e2e-cart-item-subtotal:nth-child({index})"));
-        }
-
-        protected IWebElement LicensesValueLabel => driver.FindElement(By.ClassName("e2e-licenses-discounts-label"));
-
         protected IWebElement LicensesValue => driver.FindElement(By.ClassName("e2e-licenses-price"));
 
-        protected IWebElement MaintenanceValueLabel => driver.FindElement(By.ClassName("e2e-ms-discounts-label"));
-
         protected IWebElement MaintenanceValue => driver.FindElement(By.ClassName("e2e-maintenance-price"));
-
-        protected IWebElement TotalDiscountsValueLabel => driver.FindElement(By.ClassName("e2e-total-discounts-label"));
 
         protected IWebElement TotalDiscountsValue => driver.FindElement(By.ClassName("e2e-total-discounts-price"));
 

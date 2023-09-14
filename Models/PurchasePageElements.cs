@@ -13,7 +13,5 @@ namespace Progress_Store.Models
         protected IWebElement DevCraftUIBuyNowButton => driver.FindElement(By.XPath("(//a[contains(.,'Buy now')])[1]"));
 
         protected IWebElement DevCraftCompleteBuyNowButton => driver.FindElement(By.XPath("(//a[contains(.,'Buy now')])[2]"));
-
-        protected IWebElement DevCraftUltimateBuyNowButton => driver.FindElement(By.XPath("(//a[contains(.,'Buy now')])[3]"));
     }
 }
