@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33801.468
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Progress_Store", "Progress_Store.csproj", "{B8975819-6C6E-4BC7-A659-09F7E2C0CC4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Progress_Store", "Progress_Store.csproj", "{B8975819-6C6E-4BC7-A659-09F7E2C0CC4A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{68FF9554-EF34-470D-A4C6-F0AB58DFD2A2}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
