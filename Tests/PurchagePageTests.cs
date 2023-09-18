@@ -2,7 +2,7 @@
 
 namespace Progress_Store.Tests
 {
-    public class PurchagePageTests : HomeTest, Constants
+    public class PurchagePageTests : HomeTest
     {
         private PurchasePage purchasePage;
         private YourOrderPage yourOrderPage;

@@ -2,7 +2,7 @@
 
 namespace Progress_Store.Tests
 {
-    public class YourOrderPageTests : HomeTest, Constants
+    public class YourOrderPageTests : HomeTest
     {
         private PurchasePage purchasePage;
         private YourOrderPage yourOrderPage;
@@ -67,7 +67,8 @@ namespace Progress_Store.Tests
         {
             var renewPrice = yourOrderPage.GetMaintenanceRenewPrice(index);
             double discount = 0;
-            var maintenanceCount = int.Parse(maintenanceYearsCount.Replace("+", "")
+            var maintenanceCount = int.Parse(maintenanceYearsCount
+                .Replace("+", "")
                 .Replace(" year", "")
                 .Replace("s", "").Trim());
 
@@ -75,7 +76,6 @@ namespace Progress_Store.Tests
             if (maintenanceYearsCount == "+1 year")
             {
                 discount = Math.Round(renewPrice * 0.05, 2);
-
             }
             else if (maintenanceYearsCount == "+2 years")
             {

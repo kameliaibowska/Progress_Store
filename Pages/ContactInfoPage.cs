@@ -93,51 +93,24 @@ namespace Progress_Store.Pages
 
         public bool CheckStateFieldIsDisplayed()
         {
-            if (DoesElementExist(driver, By.Id("siState")) || DoesElementExist(driver, By.Id("biState")))
-            { 
-                return true; 
-            }
-            else 
-            { 
-                return false; 
-            }
+            return DoesElementExist(driver, By.Id("siState")) || DoesElementExist(driver, By.Id("biState"));
         }
 
         public bool CheckVATFieldIsDisplayed()
         {
-            if (DoesElementExist(driver, By.Id("biCountryTaxIdentificationNumber")) 
-                || DoesElementExist(driver, By.Id("siCountryTaxIdentificationNumber")))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return DoesElementExist(driver, By.Id("biCountryTaxIdentificationNumber"))
+                || DoesElementExist(driver, By.Id("siCountryTaxIdentificationNumber"));
+
         }
 
         public bool CheckGSTFieldIsDisplayed()
         {
-            if (DoesElementExist(driver, By.Id("biGST")) || DoesElementExist(driver, By.Id("siGST")))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return DoesElementExist(driver, By.Id("biGST")) || DoesElementExist(driver, By.Id("siGST"));
         }
 
         public bool CheckErrorMessageIsDisplayed()
         {
-            if (DoesElementExist(driver, By.Id("error-message")))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return DoesElementExist(driver, By.Id("error-message"));
         }
 
         public string GetErrorMessage()

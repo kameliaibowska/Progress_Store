@@ -3,7 +3,7 @@ using Progress_Store.Pages;
 
 namespace Progress_Store.Tests
 {
-    public class ContactInfoPageTests : HomeTest, Constants
+    public class ContactInfoPageTests : HomeTest
     {
         private PurchasePage purchasePage;
         private YourOrderPage yourOrderPage;
