@@ -55,10 +55,10 @@ namespace Progress_Store.Pages
             licenseQuantityPopup.Click();
         }
 
-        public void ChangeMaintenanceQuantity(int index, int maitenanceCount)
+        public void ChangeMaintenanceQuantity(int index, int maintenanceCount)
         {
             MaintenanceQuantityDropdown(index).Click();
-            var maintenanceQuantityPopup = MaintenanceQuantitySelection(maitenanceCount);
+            var maintenanceQuantityPopup = MaintenanceQuantitySelection(maintenanceCount);
             maintenanceQuantityPopup.Click();
         }
 
